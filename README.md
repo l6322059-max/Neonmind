@@ -1,33 +1,39 @@
 # NeonMind 3.0
 
-A black-and-neon AI chat assistant for Android, built with Flutter.
+A black-and-neon AI chat assistant built with Flutter for Android and Windows desktop.
 
 ## What it does
 
-- **Many AIs in one app.** Claude, ChatGPT, Gemini, Grok, DeepSeek, Mistral, Groq, OpenRouter, or any OpenAI-compatible server. Each keeps its own key and model.
-- **Liquid glass and rainbow light.** Frosted glass panels over a drifting aurora, animated rainbow borders, a rainbow orb.
-- **Photos and files.** The yellow + button sends photos (gallery or camera), PDFs, and text or code files to the AI.
-- **The AI makes real files.** Ask for a PowerPoint (neon-themed slides), a Word document or an Excel sheet (with working formulas) and it appears as a file card with a Save button. It also writes text, CSV, HTML, SVG and code files.
-- **100+ languages.** Settings > Language. The AI answers in your language, and the app translates its own screens using your AI (RTL languages supported). You can also type any other language.
-- **The AI sends things back.** It can create files (notes, code, CSV...) with a Save button, and `/image a neon city` makes pictures with ChatGPT or Gemini.
-- **Live activity.** After you send, a card shows each step with a timer while the AI works.
-- **Key and credit check.** Saving a new key checks it once and shows your credit where the provider shares it (DeepSeek, OpenRouter).
-- **Admin panel.** PIN-locked: usage stats, effect switches, the AI's system prompt, image models, chat export, erase all data.
-- **Offline brain.** With no key it still does math, time, date and jokes.
+- Many AI providers, including Claude, ChatGPT, Gemini, Grok, DeepSeek, Mistral, Groq and OpenRouter.
+- Liquid-glass panels, aurora background and animated neon effects.
+- Supported photo and file attachments.
+- AI-generated documents, spreadsheets, presentations, text, CSV, HTML, SVG and code files.
+- Multilingual interface and a PIN-protected admin panel.
+- Basic offline functions.
 
-## Declaration
+## Build for Windows PC
 
-NeonMind is an AI assistant. It can be wrong, so double-check anything important. It is not a substitute for professional medical, legal, or financial advice. When an API key is set, your messages, photos and files are sent to the AI company you picked and handled under that company's terms. Keys and the admin PIN hash are stored only on your device. The AI's identity and behavior rules live in `kPersona` in `lib/ai_engine.dart` and can be edited in the Admin panel.
+1. Open this repository on GitHub and select Actions.
+2. Run Build Windows PC App, or push a commit to main.
+3. Open the completed workflow run and download the NeonMind-Windows-x64 artifact.
+4. Extract NeonMind-Windows-x64.zip into a folder.
+5. Run neonmind.exe. Keep the other files and folders beside the EXE; they are required.
 
-## Get the APK (no setup on your computer)
+This workflow builds a Windows x64 desktop application. It does not produce an MSI installer.
 
-1. Upload everything to a GitHub repo (keep the folder layout: `lib/` with 4 Dart files, `pubspec.yaml`, `.github/workflows/build-apk.yml`).
-2. Open **Actions**, run **Build APK**.
-3. Download **NeonMind-apk** from the finished run, unzip, install `app-release.apk`.
+## Build the Android APK
 
-## Files
+1. Open Actions and run Build APK.
+2. Download NeonMind-apk from the completed run.
+3. Install app-release.apk on your Android device.
 
-- `lib/main.dart` chat screen, + menu, message bar, live activity
-- `lib/effects.dart` glass, aurora, rainbow light
-- `lib/ai_engine.dart` providers, attachments, images, key check, offline brain
-- `lib/admin.dart` Settings and Admin panel
+## Main source files
+
+- lib/main.dart — chat screen and message interface
+- lib/effects.dart — glass, aurora and rainbow effects
+- lib/ai_engine.dart — AI providers, attachments and offline functions
+- lib/admin.dart — settings and admin panel
+
+## Privacy and accuracy
+
+NeonMind is an AI assistant and can make mistakes. When you configure a provider, messages and selected attachments are sent to that provider and handled under its terms. Keep API keys private and do not commit them to this repository.
