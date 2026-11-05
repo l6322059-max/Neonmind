@@ -1,0 +1,54 @@
+name: Build Windows PC App
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Enable Windows desktop
+        run: flutter config --enable-windows-desktop
+
+      - name: Generate Windows runner
+        shell: pwsh
+        run: |
+          if (!(Test-Path 'windows/CMakeLists.txt')) {
+            flutter create --platforms=windows --project-name neonmind --org com.neonmind .
+          }
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Windows app
+        run: flutter build windows --release
+
+      - name: Package Windows app
+        shell: pwsh
+        run: |
+          $release = 'build/windows/x64/runner/Release'
+          if (!(Test-Path "$release/neonmind.exe")) {
+            throw "Expected executable was not produced at $release/neonmind.exe"
+          }
+          Compress-Archive -Path "$release/*" -DestinationPath 'NeonMind-Windows-x64.zip' -Force
+
+      - name: Upload Windows app ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: NeonMind-Windows-x64
+          path: NeonMind-Windows-x64.zip
+          if-no-files-found: error
